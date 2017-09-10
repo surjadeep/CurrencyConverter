@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Currency Converter Test App",
   "main": "index.js",
+  "repository": "https://github.com/surjadeep/CurrencyConverter",
   "author": "study.surja@gmail.com",
   "license": "MIT",
   "devDependencies": {
