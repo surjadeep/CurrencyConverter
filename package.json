@@ -1,0 +1,34 @@
+{
+  "name": "CurrencyConverter",
+  "version": "1.0.0",
+  "description": "Currency Converter Test App",
+  "main": "index.js",
+  "author": "study.surja@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+	"build": "webpack -p"
+  },
+  "dependencies": {	
+	"redux-thunk": "2.2.0",
+    "redux": "3.7.2",
+    "react-router-dom": "4.2.2",
+    "react-redux": "5.0.6",
+    "react-dom": "15.5.3",
+    "react": "15.5.3",
+    "materialize-css": "0.100.2",
+    "axios": "0.16.2",
+	"sass-loader": "^6.0.2",
+    "style-loader": "^0.13.2",
+	"babel-preset-stage-2": "^6.22.0",
+    "css-loader": "^0.26.2"
+  }
+}
