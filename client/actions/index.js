@@ -5,12 +5,12 @@ const ROOT_URL = `http://api.fixer.io/latest?symbols=USD,CAD`;
 export const fetchLatestCurrencyRate = () => dispatch => {
 	axios.get(`${ROOT_URL}`)
 	  .then(response => {
-		dispatch({
-		  type: MAKE_CONVERSION_RATE_ARRAY,
-		  payload: [ 1, response.data.rates.USD, response.data.rates.CAD ]
-		});
+			dispatch({
+			  type: MAKE_CONVERSION_RATE_ARRAY,
+			  payload: [ 1, response.data.rates.USD, response.data.rates.CAD ]
+			});
 	  })
 	  .catch(e => {
-		return;
+			console.error('data api fetch failed, please try again to run the app');
 	  });
 }
