@@ -1,11 +1,8 @@
 import { MAKE_CONVERSION_RATE_ARRAY } from "../actions/types";
 export default function(state = null, action) {
-	// console.log(state, action.payload);
   switch (action.type) {
     case "MAKE_CONVERSION_RATE_ARRAY":
-		// action.payload.data[action.payload.no-1] = null;
-		//console.log(action.payload);
-    for (var i = 0; i < action.payload.no; i++) {
+    for (var i = 0; i < action.payload.total; i++) {
         action.payload.data.push({
           iv: "",
           ic: 0,
@@ -13,7 +10,6 @@ export default function(state = null, action) {
           oc: 1
         });
     }
-    console.log(action.payload);
 		return action.payload;
 	case "UPDATE_CURRENCY_CONVERTER":
   return {

@@ -1,6 +1,7 @@
 import React from 'react';
 import CurrencyConverterWrapper from "./currencyConverterWrapper";
 
-const App = () => <CurrencyConverterWrapper showItems={2}/>
+// to create more instances simply change value in "showItems"
+const App = () => <CurrencyConverterWrapper showItems={3}/>
 
 export default App;

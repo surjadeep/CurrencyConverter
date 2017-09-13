@@ -78,7 +78,6 @@ class CurrencyConverter extends Component {
         </div>
       );
     }
-	console.log(this.props.instance)
     return (
       <div className="center-align" style={{float:'left'}}>
         <div className="row">
