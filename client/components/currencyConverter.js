@@ -56,7 +56,7 @@ class CurrencyConverter extends Component {
           <div className="col s12">
             <div className="card">
               <div className="card-content">
-                <span className="card-title">Currency converter</span>
+                <span className="card-title">Currency converter - {this.props.instance+1}</span>
                 <p>Type in amount and select currency:</p>
                 <div className="input-field">
                   <input
