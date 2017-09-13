@@ -15,12 +15,7 @@ export const fetchLatestCurrencyRate = (total) => dispatch => {
 			});
 	  })
 	  .catch(e => {
-			console.error('data api fetch failed, please try again later.');
+			throw "Server not responding, please try again later.";
 	  });
 }
-export const updateCurrencyConverter = (id, data) => {
-	return {
-		type: UPDATE_CURRENCY_CONVERTER,
-		payload: {id, data}
-	};
-}
+export const updateCurrencyConverter = (id, data) => ({type: UPDATE_CURRENCY_CONVERTER,payload: {id, data}})

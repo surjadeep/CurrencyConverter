@@ -1,70 +1,41 @@
 import React, { Component } from "react";
-import * as actions from "../actions";
 import { connect } from "react-redux";
 import axios from "axios";
+import * as actions from "../actions";
 import { convert, allowOnlyIntOrFloat } from "../helper";
 
 class CurrencyConverter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      iv: "",
-      ic: 0,
-      ov: "0.00",
-      oc: 1
-    };
-    this.onInputValueChange = this.onInputValueChange.bind(this);
-    this.onInputCurrencyChange = this.onInputCurrencyChange.bind(this);
-    this.onOutputCurrencyChange = this.onOutputCurrencyChange.bind(this);
-  }
   componentDidMount() {
-    this.props.fetchLatestCurrencyRate(this.props.totalItems);
+    const { fetchLatestCurrencyRate, totalItems } = this.props;
+    fetchLatestCurrencyRate(totalItems);
   }
-  onInputValueChange(event) {
-    let iv, ic, oc, ov;
-    iv = event.target.value;
+  onInputValueChange = event => {
+    const { ic, oc } = this.props.cc.data[this.props.instance];
+    const iv = event.target.value;
     if (iv === " ") return;
-    ic = this.props.cc.data[this.props.instance].ic;
-    oc = this.props.cc.data[this.props.instance].oc;
-    ov = convert(ic, oc, allowOnlyIntOrFloat(iv), this.props.cc.rate);
-    const data = {
-      iv: allowOnlyIntOrFloat(iv),
-      ic,
-      ov,
-      oc
-    };
-	   this.props.updateCurrencyConverter(this.props.instance, data);
+    this.initConvertAndUpdateCurrencyConverter(ic, oc, iv);
   }
-  onInputCurrencyChange(event) {
-    let iv, ic, oc, ov;
-    iv = this.props.cc.data[this.props.instance].iv;
-    ic = event.target.value;
-    oc = this.props.cc.data[this.props.instance].oc;
-    ov = convert(ic, oc, allowOnlyIntOrFloat(iv), this.props.cc.rate);
-    const data = {
-      iv: allowOnlyIntOrFloat(iv),
-      ic,
-      ov,
-      oc
-    };
-	   this.props.updateCurrencyConverter(this.props.instance, data);
+  onInputCurrencyChange = event => {
+    const { iv, oc } = this.props.cc.data[this.props.instance];
+    const ic = event.target.value;
+    this.initConvertAndUpdateCurrencyConverter(ic, oc, iv);
   }
-  onOutputCurrencyChange(event) {
-    let iv, ic, oc, ov;
-    iv = this.props.cc.data[this.props.instance].iv;
-    ic = this.props.cc.data[this.props.instance].ic;
-    oc = event.target.value;
-    ov = convert(ic, oc, allowOnlyIntOrFloat(iv), this.props.cc.rate);
+  onOutputCurrencyChange = event => {
+    const { iv, ic } = this.props.cc.data[this.props.instance];
+    const oc = event.target.value;
+    this.initConvertAndUpdateCurrencyConverter(ic, oc, iv);
+  }
+  initConvertAndUpdateCurrencyConverter(ic, oc, iv) {
+    const ov = convert(ic, oc, allowOnlyIntOrFloat(iv), this.props.cc.rate);
     const data = {
       iv: allowOnlyIntOrFloat(iv),
       ic,
       ov,
       oc
     };
-	   this.props.updateCurrencyConverter(this.props.instance, data);
+     this.props.updateCurrencyConverter(this.props.instance, data);
   }
   render() {
-
     if (!this.props.cc) {
       return (
         <div className="center-align" style={{float:'left'}}>
@@ -78,6 +49,7 @@ class CurrencyConverter extends Component {
         </div>
       );
     }
+    const { ic, iv, oc, ov } = this.props.cc.data[this.props.instance];
     return (
       <div className="center-align" style={{float:'left'}}>
         <div className="row">
@@ -88,9 +60,8 @@ class CurrencyConverter extends Component {
                 <p>Type in amount and select currency:</p>
                 <div className="input-field">
                   <input
-                    id="inputValue"
                     type="text"
-					          value={this.props.cc.data[this.props.instance].iv}
+					          value={iv}
                     onChange={this.onInputValueChange}
                     placeholder="Type in amount, eg. 0.00"
                   />
@@ -98,8 +69,7 @@ class CurrencyConverter extends Component {
                 <div>
                   <select
                     className="browser-default"
-                    id="inputCurrency"
-                    value={this.props.cc.data[this.props.instance].ic}
+                    value={ic}
                     onChange={this.onInputCurrencyChange}
                   >
                     <option value="0">EUR</option>
@@ -109,9 +79,8 @@ class CurrencyConverter extends Component {
                 </div>
                 <div className="input-field">
                   <input
-                    id="outputValue"
                     type="text"
-                    value={this.props.cc.data[this.props.instance].ov}
+                    value={ov}
                     readOnly
                     className="grey lighten-5"
                   />
@@ -119,8 +88,7 @@ class CurrencyConverter extends Component {
                 <div>
                   <select
                     className="browser-default"
-                    id="outputCurrency"
-                    value={this.props.cc.data[this.props.instance].oc}
+                    value={oc}
                     onChange={this.onOutputCurrencyChange}
                   >
                     <option value="0">EUR</option>
@@ -139,9 +107,6 @@ class CurrencyConverter extends Component {
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    cc: state.cc
-  };
-}
+const mapStateToProps = state => ({cc: state.cc})
+
 export default connect(mapStateToProps, actions)(CurrencyConverter);
