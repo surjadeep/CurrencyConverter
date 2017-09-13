@@ -15,9 +15,9 @@ export default function(state = null, action) {
   return {
       ...state,
       data: [
-      ...state.data.slice(0, action.payload.id),
-      Object.assign({}, state.data[action.payload.id], action.payload.data),
-      ...state.data.slice(action.payload.id+1)
+      ...state.data.slice(0, action.payload.instance),
+      Object.assign({}, state.data[action.payload.instance], action.payload.data),
+      ...state.data.slice(action.payload.instance+1)
       ]
     };
   }

@@ -18,4 +18,4 @@ export const fetchLatestCurrencyRate = (total) => dispatch => {
 			throw "Server not responding, please try again later.";
 	  });
 }
-export const updateCurrencyConverter = (id, data) => ({type: UPDATE_CURRENCY_CONVERTER,payload: {id, data}})
+export const updateCurrencyConverter = (instance, data) => ({type: UPDATE_CURRENCY_CONVERTER,payload: {instance, data}})
