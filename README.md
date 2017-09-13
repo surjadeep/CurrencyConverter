@@ -11,4 +11,5 @@ Steps to start:
 
 Steps to create more instances:
 
-    Simply pass number of instances you want to create to "CurrencyConverterWrapper" component as "showItems" property in app.js
+    Simply pass number of instances you want to create to "CurrencyConverterWrapper"
+    component as "showItems" property in app.js
